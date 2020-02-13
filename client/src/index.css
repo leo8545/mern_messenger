@@ -1,0 +1,144 @@
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	max-width: 100%;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
+}
+
+header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 0 40px;
+	background-color: #ddd;
+}
+header .logo {
+	flex: 0 0 50%;
+}
+header ul {
+	flex: 0 0 50%;
+	padding: 0;
+	text-align: right;
+	list-style: none;
+}
+header li {
+	display: inline;
+}
+header ul a:not(:last-child) {
+	padding-right: 15px;
+}
+/* Page: Chat */
+.messenger {
+	display: flex;
+	align-items: flex-start;
+	padding: 10px;
+	border: 1px solid #222;
+	margin: 10px;
+	height: 300px;
+}
+.sidebar {
+	flex: 0 0 20%;
+	overflow-y: auto;
+	height: 300px;
+	position: relative;
+}
+.search-field {
+	padding: 20px 0;
+	position: sticky;
+	top: 0;
+	background-color: #fff;
+}
+#search {
+	min-width: 250px;
+	padding: 10px;
+	border-radius: 20px;
+	border: 1px solid #222;
+}
+.user-list-item {
+	padding: 20px 10px;
+	margin: 2px 0;
+	background-color: #f3f3f3;
+}
+.user-list-item.active-user {
+	background-color: rgb(127, 255, 159);
+}
+.user-list-item:hover {
+	cursor: pointer;
+}
+.panel {
+	flex: 0 0 80%;
+	height: 300px;
+	overflow-y: auto;
+	position: relative;
+}
+
+.chatBox {
+	position: sticky;
+	bottom: 0;
+	background-color: #ddd;
+	display: flex;
+	/* padding: 10px 0 0 0; */
+}
+.chatBox .form-field {
+	flex: 0 0 90%;
+}
+.chatBox #body {
+	width: 100%;
+	padding: 10px;
+}
+.chatBox input[type="submit"] {
+	flex: 0 0 10%;
+}
+.panel h1 {
+	margin: 0;
+	background-color: #f3f3f3;
+	position: sticky;
+	top: 0;
+	padding: 10px 0;
+}
+.messages {
+	display: flex;
+	flex-direction: column;
+}
+.messages .to,
+.messages .from {
+	margin: 3px 0;
+	padding: 8px 16px;
+	border-radius: 10px;
+}
+.from {
+	background-color: #ddd;
+	justify-self: right;
+	align-self: flex-end;
+}
+.to {
+	background-color: cornflowerblue;
+	color: #fff;
+	justify-self: left;
+	align-self: flex-start;
+}
+.author {
+	padding: 2px 3px;
+	font-style: italic;
+	font-size: 80%;
+}
+.to .author {
+	color: #0f0;
+}
+.from .author {
+	color: #f05;
+}
+.logo div {
+	visibility: hidden;
+}
+#add-group-wrapper {
+	display: none;
+}
