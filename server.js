@@ -9,14 +9,13 @@ app.use(bodyParser.json());
 
 mongoose
 	.connect(
-		"mongodb+srv://sharjeel:sYmbolic*9@approck-mai7f.mongodb.net/mern_messenger_db" ||
+		"mongodb//sharjeel:sYmbolic*9@approck-mai7f.mongodb.net/mern_messenger_db" ||
 			"mongodb://localhost/approckmsg",
 		{
 			useUnifiedTopology: true,
 			useNewUrlParser: true,
 			useFindAndModify: false,
-			useCreateIndex: true,
-			useMongoClient: true
+			useCreateIndex: true
 		}
 	)
 	.then(() => console.log("Connected to mongodb"))
