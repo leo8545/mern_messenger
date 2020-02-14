@@ -8,15 +8,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 mongoose
-	.connect(
-		"mongodb+srv://sharjeel:sYmbolic*9@approck-mai7f.mongodb.net/test?retryWrites=true&w=majority",
-		{
-			useUnifiedTopology: true,
-			useNewUrlParser: true,
-			useFindAndModify: false,
-			useCreateIndex: true
-		}
-	)
+	.connect(process.env.MONGODB_URI || "mongodb://localhost/approckmsg", {
+		useUnifiedTopology: true,
+		useNewUrlParser: true,
+		useFindAndModify: false,
+		useCreateIndex: true
+	})
 	.then(() => console.log("Connected to mongodb"))
 	.catch(err => console.log("couldnot connect to mongodb", err));
 
