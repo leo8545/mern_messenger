@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 mongoose
-	.connect(process.env.MONGODB_URI || "mongodb://localhost/approckmsg", {
+	.connect(process.env.MONGOLAB_URI || "mongodb://localhost/approckmsg", {
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
 		useFindAndModify: false,
