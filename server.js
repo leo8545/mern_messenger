@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-const db = process.env.MONGODB_URL || "mongodb://localhost/approckmsg";
+const db = process.env.MONGODB_URL;
 mongoose
 	.connect(db, {
 		useUnifiedTopology: true,
