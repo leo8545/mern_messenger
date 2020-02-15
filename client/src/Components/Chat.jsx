@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import MessengerSidebar from "./MessengerSidebar";
 import MessengerPanel from "./MessengerPanel";
+import Group from "./Group";
 
 class Chat extends Component {
 	state = {
@@ -33,10 +34,10 @@ class Chat extends Component {
 			<React.Fragment>
 				<h1>Chat</h1>
 				<div id="add-group-wrapper">
-					<h1>Add a new group</h1>
+					<Group />
 				</div>
 				<div className="messenger">
-					<MessengerSidebar onClick={this.handleWith} />
+					<MessengerSidebar onClick={this.handleWith} loggedInUser={username} />
 					<MessengerPanel withUser={this.state.with} loggedInUser={username} />
 				</div>
 			</React.Fragment>

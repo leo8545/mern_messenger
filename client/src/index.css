@@ -57,7 +57,7 @@ header ul a:not(:last-child) {
 	background-color: #fff;
 }
 #search {
-	min-width: 250px;
+	min-width: 200px;
 	padding: 10px;
 	border-radius: 20px;
 	border: 1px solid #222;
@@ -136,9 +136,25 @@ header ul a:not(:last-child) {
 .from .author {
 	color: #f05;
 }
-.logo div {
-	visibility: hidden;
-}
 #add-group-wrapper {
 	display: none;
+}
+.user-list-item.group {
+	background-color: #09f;
+	color: #fff;
+}
+.user-list-item.group::before {
+	content: "Group:: ";
+}
+.create-group {
+	width: 200px;
+}
+.create-group p {
+	margin: 2px 0;
+	background-color: #09f;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 20px;
+	text-align: center;
+	cursor: pointer;
 }

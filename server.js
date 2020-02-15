@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-const db = process.env.MONGODB_URL;
+const db = process.env.MONGODB_URL || "mongodb://localhost/approckmsg";
 mongoose
 	.connect(db, {
 		useUnifiedTopology: true,
@@ -23,6 +23,7 @@ mongoose
 
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/messages", require("./routes/api/messages"));
+app.use("/api/groups", require("./routes/api/groups"));
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {

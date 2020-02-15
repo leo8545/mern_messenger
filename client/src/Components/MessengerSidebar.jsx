@@ -4,7 +4,7 @@ import InputField from "./Forms/InputField";
 class MessengerSidebar extends Component {
 	constructor() {
 		super();
-		this.state = { search: "", users: [] };
+		this.state = { search: "", users: [], groups: [] };
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -17,6 +17,7 @@ class MessengerSidebar extends Component {
 	};
 	componentDidMount() {
 		this.fetchUsers();
+		this.fetchGroups();
 	}
 	fetchUsers = () => {
 		fetch("/api/users")
@@ -25,24 +26,50 @@ class MessengerSidebar extends Component {
 				this.setState({ users: data });
 			});
 	};
-	componentDidUpdate(p, prevState) {
-		// console.log(this.state.search);
-		if (this.state.search === "") {
-			this.fetchUsers();
-		}
-		fetch("/api/users/search", {
-			method: "POST",
-			body: JSON.stringify(this.state),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
+	fetchGroups = () => {
+		const { loggedInUser } = this.props;
+		let groups = [];
+		fetch("/api/groups/get/all")
 			.then(res => res.json())
 			.then(data => {
-				if (data.length) {
-					this.setState({ users: data });
+				data.forEach(group => {
+					group.members.forEach(member => {
+						if (member === loggedInUser) {
+							groups.push(group);
+						}
+					});
+				});
+				if (groups && groups !== this.state.groups) {
+					this.setState({ groups });
 				}
 			});
+	};
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.groups !== this.state.groups) {
+			console.log("here");
+			// this.fetchGroups();
+		}
+		if (prevState.search !== this.state.search) {
+			console.log("here too");
+			// console.log(this.state.search);
+			if (this.state.search === "") {
+				this.fetchUsers();
+			} else {
+				fetch("/api/users/search", {
+					method: "POST",
+					body: JSON.stringify(this.state),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(res => res.json())
+					.then(data => {
+						if (data.length) {
+							this.setState({ users: data });
+						}
+					});
+			}
+		}
 	}
 	handleAddGroupBtn = event => {
 		document.getElementById("add-group-wrapper").style.display = "block";
@@ -50,7 +77,7 @@ class MessengerSidebar extends Component {
 	render() {
 		const { onClick } = this.props;
 
-		const { search, users } = this.state;
+		const { search, users, groups } = this.state;
 		return (
 			<div className="sidebar">
 				<div className="search-field">
@@ -71,6 +98,15 @@ class MessengerSidebar extends Component {
 					<div className="user-list-item active-user" onClick={onClick}>
 						BroadCast to All
 					</div>
+					{groups.map(group => (
+						<div
+							key={group._id}
+							className="user-list-item group"
+							onClick={onClick}
+						>
+							{group.name}
+						</div>
+					))}
 					{users.map(user => (
 						<div key={user._id} className="user-list-item" onClick={onClick}>
 							{user.name}

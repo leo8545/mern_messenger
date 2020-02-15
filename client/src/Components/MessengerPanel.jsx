@@ -24,7 +24,9 @@ class MessengerPanel extends Component {
 		})
 			.then(res => res.json())
 			.then(data => {
-				console.log(data);
+				let messages = this.state.messages;
+				messages.push(data[0]);
+				this.setState({ messages });
 			});
 		this.setState({ body: "" });
 	};
@@ -61,14 +63,12 @@ class MessengerPanel extends Component {
 		console.log("mounted...");
 		this.getMessagesToAll();
 	}
-	componentDidUpdate() {
-		const reqBody = {
-			from: this.props.loggedInUser,
-			to: this.props.withUser
-		};
-		if (this.props.withUser === "") {
-			this.getMessagesToAll();
-		} else {
+	componentDidUpdate(prevProps) {
+		if (prevProps.withUser !== this.props.withUser) {
+			const reqBody = {
+				from: this.props.loggedInUser,
+				to: this.props.withUser
+			};
 			this.getMessages(reqBody);
 		}
 	}
