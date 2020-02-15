@@ -11,3 +11,6 @@
 #### Heroku app link
 https://desolate-reaches-92056.herokuapp.com/
 
+```Developed by: Sharjeel Ahmad Butt```
+leo8545@gmail.com | isharjeelahmad@gmail.com
+
