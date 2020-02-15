@@ -158,3 +158,28 @@ header ul a:not(:last-child) {
 	text-align: center;
 	cursor: pointer;
 }
+#add-group-wrapper {
+	background-color: #f3f3f3;
+	padding: 5px 20px;
+}
+#add-group-wrapper h4 {
+	margin: 3px 0;
+}
+#add-group-wrapper .form-field {
+	display: inline;
+}
+#add-group-wrapper input[type="submit"] {
+	margin-left: 20px;
+}
+#add-group-wrapper h4 {
+	display: inline;
+}
+#btn-close {
+	display: inline;
+	padding: 10px;
+	cursor: pointer;
+	float: right;
+	background-color: #fff;
+	font-weight: 700;
+	font-size: 130%;
+}

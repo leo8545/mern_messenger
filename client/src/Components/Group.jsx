@@ -68,11 +68,17 @@ class Group extends Component {
 				this.setState({ errors });
 			});
 	};
+	hideGroupWrapper = event => {
+		document.getElementById("add-group-wrapper").style.display = "none";
+	};
 	render() {
 		const { groupName, users, errors } = this.state;
 		return (
 			<React.Fragment>
-				<h1>Add a new group</h1>
+				<h4>Add a new group</h4>
+				<div id="btn-close" onClick={this.hideGroupWrapper}>
+					x
+				</div>
 				{errors ? errors.map(err => <div key={err}>{err}</div>) : ""}
 				<form onSubmit={this.handleSubmit}>
 					<InputField
