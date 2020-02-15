@@ -49,7 +49,7 @@ class RegisterForm extends Component {
 	render() {
 		const { errors, username, password } = this.state;
 		return (
-			<form onSubmit={this.handleSubmit}>
+			<form onSubmit={this.handleSubmit} className="register-form">
 				<ul>
 					{errors.map(err => (
 						<li key={err}>{err}</li>

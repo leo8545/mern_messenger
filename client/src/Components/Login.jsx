@@ -6,7 +6,7 @@ class Login extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<h1>Login</h1>
+				<h1 className="pageTitle">Login</h1>
 				<LoginForm />
 			</React.Fragment>
 		);

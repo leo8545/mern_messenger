@@ -183,3 +183,85 @@ header ul a:not(:last-child) {
 	font-weight: 700;
 	font-size: 130%;
 }
+.login-form,
+.register-form,
+.buttons {
+	max-width: 400px;
+	margin: 0 auto;
+}
+.login-form label,
+.register-form label {
+	display: block;
+	margin: 15px 0;
+}
+.login-form input[type="submit"],
+.register-form input[type="submit"],
+.btn {
+	padding: 10px 40px;
+	border: 1px solid #bbb;
+	margin: 15px 0;
+	border-radius: 20px;
+	cursor: pointer;
+	background-color: #222;
+	color: #fff;
+	transition: background-color 0.3s;
+}
+.login-form input[type="submit"]:hover,
+.register-form input[type="submit"]:hover,
+.btn:hover {
+	background-color: #fff;
+	color: #000;
+}
+header a,
+.buttons a {
+	text-decoration: none;
+}
+.login-form div.form-field,
+.register-form div.form-field {
+	margin: 5px 0;
+}
+.login-form div.form-field input,
+.register-form div.form-field input {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #bbb;
+	border-radius: 20px;
+	outline: none;
+}
+.login-form div.form-field input:focus,
+.register-form div.form-field input:focus {
+	border-color: #ddd;
+}
+.pageTitle {
+	background-color: #f2f2f2;
+	margin: 0;
+	padding: 10px 0;
+	text-align: center;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+div.btn {
+	display: block;
+	text-align: center;
+	text-decoration: none;
+}
+header a {
+	color: #222;
+	font-family: monospace;
+}
+header li,
+header .logo div {
+	margin-left: 10px;
+	border: 1px solid #bbb;
+	padding: 10px 20px;
+}
+header .logo div {
+	display: inline-block;
+	border: 1px solid #bbb;
+	padding: 10px 20px;
+}
+header li:hover,
+header .logo div:hover {
+	background-color: #0f0;
+	color: #000;
+}

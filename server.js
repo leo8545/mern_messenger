@@ -1,13 +1,15 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
+
 const app = express();
 const port = process.env.PORT || 5000;
-const path = require("path");
+const db = process.env.MONGODB_URL || "mongodb://localhost/approckmsg";
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-const db = process.env.MONGODB_URL;
+// Database connection
 mongoose
 	.connect(db, {
 		useUnifiedTopology: true,

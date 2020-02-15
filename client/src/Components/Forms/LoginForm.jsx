@@ -58,7 +58,7 @@ class LoginForm extends Component {
 			);
 		return (
 			<React.Fragment>
-				<form onSubmit={this.handleSubmit}>
+				<form onSubmit={this.handleSubmit} className="login-form">
 					<ul>
 						{errors.map(err => (
 							<li key={err}>{err}</li>

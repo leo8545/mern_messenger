@@ -22,9 +22,7 @@ async function getMessagesToAll() {
 
 router.post("/add", async (req, res) => {
 	let { body, from, to } = req.body;
-	if (to === "") {
-		to = "all";
-	}
+	if (to === "") to = "all";
 	try {
 		let r = await createMessage(body, from, to);
 		return res.send(r);

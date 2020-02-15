@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const Group = require("../../models/Group");
+/**
+ * @route	POST api/groups/add
+ * @desc	Add a group
+ * @access	Public
+ */
 
 router.post("/add", async (req, res) => {
 	const { name, members } = req.body;
@@ -11,6 +16,12 @@ router.post("/add", async (req, res) => {
 		return res.send(err);
 	}
 });
+
+/**
+ * @route	GET api/groups
+ * @desc	Get all groups
+ * @access	Public
+ */
 
 router.get("/get/all", async (req, res) => {
 	try {
