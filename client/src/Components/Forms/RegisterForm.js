@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import InputField from "./InputField";
+import { UserService } from "../../services/UserService";
 class RegisterForm extends Component {
 	constructor() {
 		super();
@@ -15,21 +16,14 @@ class RegisterForm extends Component {
 
 	handleSubmit = event => {
 		event.preventDefault();
-		fetch("/api/users/add", {
-			method: "POST",
-			body: JSON.stringify(this.state),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-			.then(res => res.json())
-			.then(d => {
-				this.setState({ errors: this.handleError(d) });
-			});
+		const { username, password } = this.state;
+		UserService.add(username, password).then(error => {
+			this.setState({ errors: this.handleError(error) });
+		});
 	};
 
 	handleError = response => {
-		const errors = [];
+		let errors = [];
 		if (response.errors) {
 			Object.keys(response.errors).forEach(fieldName => {
 				errors.push(`${fieldName} is a required field`);

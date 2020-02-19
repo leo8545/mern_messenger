@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import InputField from "./Forms/InputField";
+import { UserService } from "../services/UserService";
 
 class MessengerSidebar extends Component {
 	constructor() {
@@ -20,11 +21,9 @@ class MessengerSidebar extends Component {
 		this.fetchGroups();
 	}
 	fetchUsers = () => {
-		fetch("/api/users")
-			.then(res => res.json())
-			.then(data => {
-				this.setState({ users: data });
-			});
+		UserService.getAll().then(users => {
+			this.setState({ users });
+		});
 	};
 	fetchGroups = () => {
 		const { loggedInUser } = this.props;
@@ -55,19 +54,11 @@ class MessengerSidebar extends Component {
 			if (this.state.search === "") {
 				this.fetchUsers();
 			} else {
-				fetch("/api/users/search", {
-					method: "POST",
-					body: JSON.stringify(this.state),
-					headers: {
-						"Content-Type": "application/json"
+				UserService.search(this.state.search).then(data => {
+					if (data.length) {
+						this.setState({ users: data });
 					}
-				})
-					.then(res => res.json())
-					.then(data => {
-						if (data.length) {
-							this.setState({ users: data });
-						}
-					});
+				});
 			}
 		}
 	}

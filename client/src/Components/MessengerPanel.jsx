@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { MessageService } from "../services/MessageService";
 import InputField from "./Forms/InputField";
 
 class MessengerPanel extends Component {
@@ -10,18 +11,9 @@ class MessengerPanel extends Component {
 	}
 	handleSubmit = event => {
 		event.preventDefault();
-		const reqBody = {
-			body: this.state.body,
-			from: this.props.loggedInUser,
-			to: this.props.withUser
-		};
-		fetch("/api/messages/add", {
-			method: "POST",
-			body: JSON.stringify(reqBody),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
+		const { body } = this.state;
+		const { loggedInUser, withUser } = this.props;
+		MessageService.add(body, loggedInUser, withUser)
 			.then(res => res.json())
 			.then(data => {
 				let messages = this.state.messages;
@@ -34,42 +26,21 @@ class MessengerPanel extends Component {
 		const { name, value } = event.target;
 		this.setState({ [name]: value });
 	};
-	getMessagesToAll = () => {
-		fetch("/api/messages/get/all", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-			.then(res => res.json())
-			.then(data => {
-				this.setState({ messages: data });
-			});
-	};
-	getMessages = reqBody => {
-		fetch("/api/messages", {
-			method: "POST",
-			body: JSON.stringify(reqBody),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-			.then(res => res.json())
-			.then(data => {
-				this.setState({ messages: data });
-			});
-	};
 	componentDidMount() {
-		console.log("mounted...");
-		this.getMessagesToAll();
+		MessageService.getAll(this.props.loggedInUser)
+			.then(res => res.json())
+			.then(data => {
+				this.setState({ messages: data });
+			});
 	}
 	componentDidUpdate(prevProps) {
 		if (prevProps.withUser !== this.props.withUser) {
-			const reqBody = {
-				from: this.props.loggedInUser,
-				to: this.props.withUser
-			};
-			this.getMessages(reqBody);
+			const { loggedInUser, withUser } = this.props;
+			MessageService.get(loggedInUser, withUser)
+				.then(res => res.json())
+				.then(data => {
+					this.setState({ messages: data });
+				});
 		}
 	}
 	render() {

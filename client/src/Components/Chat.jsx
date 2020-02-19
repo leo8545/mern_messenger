@@ -23,6 +23,7 @@ class Chat extends Component {
 					: event.target.textContent
 		});
 	};
+
 	render() {
 		if (
 			this.props.location.state === undefined ||
@@ -32,7 +33,7 @@ class Chat extends Component {
 		const { username } = this.props.location.state;
 		return (
 			<React.Fragment>
-				<h1>Chat</h1>
+				<h1 className="pageTitle">Chat</h1>
 				<div id="add-group-wrapper">
 					<Group />
 				</div>

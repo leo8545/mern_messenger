@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import InputField from "./InputField";
+import { UserService } from "../../services/UserService";
 
 class LoginForm extends Component {
 	constructor() {
@@ -11,34 +12,21 @@ class LoginForm extends Component {
 	}
 	handleSubmit = event => {
 		event.preventDefault();
-		fetch("/api/users/login", {
-			method: "POST",
-			body: JSON.stringify(this.state),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-			.then(res => res.json())
-			.then(data => {
-				console.log(data);
-				if (!data.error) {
-					this.setState({ errors: [], isLogin: true });
-				} else {
-					this.setState({ errors: this.handleError(data), isLogin: false });
-				}
-			});
+		const { username, password } = this.state;
+		UserService.login(username, password).then(response => {
+			if (!response.error) this.setState({ errors: [], isLogin: true });
+			else
+				this.setState({ errors: this.handleError(response), isLogin: false });
+		});
 	};
 	handleChange = event => {
 		const { name, value } = event.target;
 		this.setState({ [name]: value });
 	};
 	handleError = response => {
-		const errors = [];
-		if (response.error) {
-			Object.keys(response).forEach(err => {
-				errors.push(response[err]);
-			});
-		}
+		let errors = [];
+		if (response.error)
+			Object.keys(response).forEach(err => errors.push(response[err]));
 		return errors;
 	};
 
